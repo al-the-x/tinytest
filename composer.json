@@ -1,0 +1,24 @@
+{
+    "name": "al-the-x/tinytest",
+    "description": "The tiniest test harness you can get. Because real tests just need `setUp`, `tearDown` and `assert`.",
+    "homepage": "https://al-the-x.github.io/tinytest",
+    "license": "GPL-3.0",
+    "authors": [
+        {
+            "name": "David Rogers",
+            "email": "hello@al-the-x.me"
+        }
+    ],
+    "minimum-stability": "dev",
+    "keywords": [ "testing", "xunit" ],
+    "support": {
+        "source": "https://github.com/al-the-x/tinytest",
+        "issues": "https://github.com/al-the-x/tinytest/issues"
+    },
+    "require": {},
+    "autoload": {
+        "psr-0": {
+            "TinyTest\\": "src/"
+        }
+    }
+}
