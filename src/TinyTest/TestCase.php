@@ -207,7 +207,7 @@ class TestCase {
     $here = realpath((new \ReflectionClass($self))->getFileName());
 
     if ( $here === realpath($_SERVER['PHP_SELF']) )
-      exit(Runner::instance()->results($self::runAll()));
+      Runner::instance()->results($self::runAll());
   }
 } // END TestCase
 

@@ -28,7 +28,7 @@ class Runner {
       array_map([ $this, 'result' ], $results, array_keys($results))
     )), "\n";
 
-    return $this->_failed;
+    exit($this->_failed);
   }
 
   static function instance($runner = null){
