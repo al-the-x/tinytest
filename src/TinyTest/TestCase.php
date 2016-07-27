@@ -212,7 +212,7 @@ class TestCase {
 } // END TestCase
 
 // FIXME: Move to `TinyTest/AssertionError.php`
-trait AssertionErrorish {
+trait FailureHandler {
     public function __construct(array $facts){
       $facts += [
         'file' => null,
@@ -223,19 +223,33 @@ trait AssertionErrorish {
     }
 }
 
+trait VerboseException {
+  public function toString($verbose = false){
+    if ( $verbose ) return parent::__toString();
+
+    return $this->getMessage();
+  }
+
+  public function __toString(){
+    return $this->toString(false);
+  }
+}
+
 // FIXME: Move to `TinyTest/AssertionError.php`
 if ( class_exists('\AssertionError') ){
   class AssertionError extends \AssertionError {
-    use AssertionErrorish;
+    use FailureHandler;
   }
 
   class TestSkipped extends \AssertionError {
+    use VerboseException;
   }
 } else {
   class AssertionError extends \RuntimeException {
-    use AssertionErrorish;
+    use FailureHandler;
   }
 
   class TestSkipped extends \RuntimeException {
+    use VerboseException;
   }
 }
