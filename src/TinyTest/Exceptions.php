@@ -1,5 +1,7 @@
 <?php
 
+namespace TinyTest;
+
 trait FailureHandler {
   public function __construct(array $facts){
     $facts += [
@@ -7,12 +9,15 @@ trait FailureHandler {
       'line' => null,
     ];
 
-    parent::__construct("Assertion Error in {$facts['file']}:{$facts['line']}");
+    parent::__construct(@$facts['message'] ?: "Assertion Error in {$facts['file']}:{$facts['line']}");
+
+    $this->file = $facts['file'];
+    $this->line = $facts['line'];
   }
 }
 
 trait VerboseException {
-  public function toString($verbose = false){
+  public function toString($verbose=false){
     if ( $verbose ) return parent::__toString();
 
     return $this->getMessage();
@@ -27,6 +32,7 @@ trait VerboseException {
 if ( class_exists('\AssertionError') ){
   class AssertionError extends \AssertionError {
     use FailureHandler;
+    use VerboseException;
   }
 
   class TestSkipped extends \AssertionError {
@@ -35,6 +41,7 @@ if ( class_exists('\AssertionError') ){
 } else {
   class AssertionError extends \RuntimeException {
     use FailureHandler;
+    use VerboseException;
   }
 
   class TestSkipped extends \RuntimeException {

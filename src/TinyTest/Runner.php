@@ -10,7 +10,7 @@ class Runner {
   }
 
   function result($run, $index){
-    list($name, $result) = $run;
+    list($name, $result) = $run; $index += 1;
 
     if ( !$result ) return "ok {$index} {$name}";
 
@@ -19,7 +19,14 @@ class Runner {
 
     $this->_failed++;
 
-    return "not ok {$index} {$name}";
+    return join("\n", [
+      "not ok {$index} {$name}",
+      "\t" . join("\n\t", [
+        "---",
+        "message: {$result}",
+        "...",
+      ])
+    ]);
   }
 
   public function results(array $results){

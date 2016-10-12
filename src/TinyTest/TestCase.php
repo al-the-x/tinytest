@@ -2,6 +2,8 @@
 
 namespace TinyTest;
 
+require_once __DIR__ . '/Exceptions.php';
+
 class TestCase {
   final private function __construct(){
     $self = get_called_class();
