@@ -3,6 +3,7 @@
 namespace TinyTest;
 
 require_once __DIR__ . '/Exceptions.php';
+require_once __DIR__ . '/Fakes.php';
 
 class TestCase {
   final private function __construct(){
